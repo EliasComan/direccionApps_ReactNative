@@ -2,8 +2,8 @@ import { Button, ScrollView, StyleSheet, Text, TextInput, View } from "react-nat
 import React,{useState} from 'react'
 
 import ImageSelector from "../components/imageSelector";
-import { addPlace } from "../store/place.reducer";
 import { colors } from "../utils/colors";
+import { savePlace } from "../store/place.actions";
 import { useDispatch } from "react-redux";
 
 const styles = StyleSheet.create({
@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
 const NewPlaceScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('')
+  const [image, setImage ] =  useState()
   const handleTitleChange = (text ) => {
     setTitle(text)};
   const handleSave =() => {
-    dispatch(addPlace(title))
+    dispatch(savePlace(title, image))
   }
   return (
     <ScrollView >
@@ -51,7 +52,7 @@ const NewPlaceScreen = ({ navigation }) => {
               onChangeText={handleTitleChange}>
             </TextInput>
             <ImageSelector
-            onImage={(image)=>console.log(image)}
+            onImage={(image)=>setImage(image)}
             />
             <Button 
               color={colors.darkBlue}  
