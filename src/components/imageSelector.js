@@ -28,12 +28,11 @@ const styles = StyleSheet.create({
     }
 })
 
-const ImageSelector = () => {
-const [pickedUrl, setPickedUrl] = useState(null)
+const ImageSelector = ({...props}) => {
+const [pickedUrl, setPickedUrl] = useState()
 
-const verifyPermissions = () => {
-    const {status } =   ImagePicker.requestCameraPermissionsAsync()
-    console.log(ImagePicker.requestCameraPermissionsAsync())
+const verifyPermissions = async () => {
+    const {status } =  await  ImagePicker.requestCameraPermissionsAsync()
     if (status !== 'granted') {
         Alert.alert('Permisos insuficientes',
         'Necesistas permisos para utilizar la camara',[{text:'Ok'}])
@@ -42,16 +41,16 @@ const verifyPermissions = () => {
         return true
     
 }
-const handleTakeImage = () => {
-    const isCameraPermissionGranted =  verifyPermissions()
+const handleTakeImage = async () => {
+    const isCameraPermissionGranted =  await verifyPermissions()
     if ( !isCameraPermissionGranted) {
         return;
     } 
-    const image =  ImagePicker.launchCameraAsync({
+    const image = await ImagePicker.launchCameraAsync({
         allowsEditing:true,
         aspect:[16,9],
         quality:0.8,
-    })       
+    })  
     setPickedUrl(image.uri)
     props.onImage(image.uri)
 }
