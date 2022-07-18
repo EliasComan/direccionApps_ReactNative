@@ -2,6 +2,7 @@ import { Button, ScrollView, StyleSheet, Text, TextInput, View } from "react-nat
 import React,{useState} from 'react'
 
 import ImageSelector from "../components/imageSelector";
+import LocationSelector from "../components/locationSelector";
 import { colors } from "../utils/colors";
 import { savePlace } from "../store/place.actions";
 import { useDispatch } from "react-redux";
@@ -53,6 +54,9 @@ const NewPlaceScreen = ({ navigation }) => {
             </TextInput>
             <ImageSelector
             onImage={(image)=>setImage(image)}
+            />
+            <LocationSelector
+            onLocation={(location) => console.log(location)}
             />
             <Button 
               color={colors.darkBlue}  
