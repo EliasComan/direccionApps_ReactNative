@@ -10,8 +10,9 @@ const placeSlice = createSlice({
     initialState,
     reducers:{
         addPlace: (state , action) => {
-            const newPlace = new Place(Date.now(), action.payload.title, action.payload.Image)
-            state.places.concat(newPlace)
+            const newPlace = new Place(Date.now(), action.payload.title, action.payload.image)
+            state.places.push(newPlace)
+            console.log(newPlace)
         }
     }
 })

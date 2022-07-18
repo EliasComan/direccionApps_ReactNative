@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const ImageSelector = ({...props}) => {
+const ImageSelector = ({onImage}) => {
 const [pickedUrl, setPickedUrl] = useState()
 
 const verifyPermissions = async () => {
@@ -52,7 +52,7 @@ const handleTakeImage = async () => {
         quality:0.8,
     })  
     setPickedUrl(image.uri)
-    props.onImage(image.uri)
+    onImage(image.uri)
 }
     return (
     <View style={styles.container}>
