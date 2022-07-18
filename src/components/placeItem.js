@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
 
 
 
-const PlaceItem = ({title, image, adress, onSelect}) => {
+const PlaceItem = ({title, image, address, onSelect}) => {
     return (
         <TouchableOpacity style={styles.container}>
           <Image source={{uri:image}} style={styles.image} />
           <View style={styles.info} >
               <Text style={styles.title}>{title}</Text>
-              <Text>{adress}</Text>
+              <Text>{address}</Text>
           </View>
         </TouchableOpacity>
       )

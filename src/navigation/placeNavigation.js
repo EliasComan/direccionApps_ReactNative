@@ -14,11 +14,6 @@ const PlaceNavigator = () => {
     return(
     <stack.Navigator initialRouteName='Place'
     screenOptions={{
-        headerStyle:{
-            backgroundColor:colors.gray,
-            
-        }
-        ,
         headerTintColor:colors.greenBlue,
         headerTitleStyle:{
             fontWeight:'bold'

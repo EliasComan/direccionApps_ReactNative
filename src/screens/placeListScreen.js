@@ -9,9 +9,6 @@ import { useSelector } from "react-redux";
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:colors.gold,
-        borderWidth:1,
-        borderColor:colors.gray
     },
     image:{
       width: 10,
@@ -29,6 +26,12 @@ const styles = StyleSheet.create({
     title:{
       fontSize:20,
       fontWeight:'bold'
+    },
+    emptyContainer:{
+      flex: 1,
+      alignItems:'center',
+      justifyContent:'center',
+      marginVertical:20
     }
 
 })
@@ -43,13 +46,23 @@ const PlaceListScreen = ({navigation}) => {
 
  }
  const renderItems = ({item}) => {
-  return <PlaceItem {...item} onSelect={()=> onSelected()} />
+  return <PlaceItem {...item} address={'123 calle, ciudad, pais'} onSelect={()=> onSelected()} />
+ }
+ 
+ const ListEmptyComponent = () => {
+  return(
+    <View style={styles.emptyContainer}>
+      <Text>No hay lugares todavia</Text>
+    </View>
+  )
  }
  return (
     <FlatList 
     data={places}
     renderItem={renderItems}
     keyExtractor={(item) => item.id}
+    ListEmptyComponent={ListEmptyComponent}
+    style={styles.container}
     />
    
   )
