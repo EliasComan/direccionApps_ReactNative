@@ -5,12 +5,11 @@ import {addPlace} from './place.reducer'
 
 export const savePlace = (title, image) => {
     return async dispatch => {
-        console.log(image)
         const fileName =  image.split('/').pop()
         const path = fileSystem.documentDirectory+fileName;
 
         try {
-           fileSystem.moveAsync({
+           await fileSystem.moveAsync({
             from:image,
             to:path
             })
