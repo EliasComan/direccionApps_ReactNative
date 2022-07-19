@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
 const PlaceListScreen = ({navigation}) => {
  const places= useSelector(state => state.place.places)
  
- const onSelected = ( place) => {
-  navigation.navigate('PlaceDetail',{placeId:place.id} )
+ const onSelected = ( id) => {
+  navigation.navigate('PlaceDetail',{placeId:id} )
 
  }
  const renderItems = ({item}) => {
-  return <PlaceItem {...item} address={'123 calle, ciudad, pais'} onSelect={()=> onSelected()} />
+  return <PlaceItem {...item}  onSelect={ onSelected} />
  }
  
  const ListEmptyComponent = () => {

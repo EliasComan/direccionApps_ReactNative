@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
         
+    },
+    text:{
+        textAlign:'center'
     }
 })
 
@@ -58,7 +61,7 @@ const handleTakeImage = async () => {
     <View style={styles.container}>
         <View style={styles.preview}>
                 {!pickedUrl? 
-                <Text>No hay imagen seleccionada</Text>
+                <Text style={styles.text}>Esperando imagen </Text>
                     :
                 <Image source={{uri:pickedUrl}} style={styles.image}></Image>
             }

@@ -38,15 +38,16 @@ const NewPlaceScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [image, setImage ] =  useState()
+  const [coords, setCoords ] = useState('')
   const handleTitleChange = (text ) => {
     setTitle(text)};
   const handleSave =() => {
-    dispatch(savePlace(title, image))
+    dispatch(savePlace(title, image, coords))
   }
   return (
     <ScrollView >
         <View style={styles.container}>
-            <Text style={styles.title}>text</Text>
+            <Text style={styles.title}>Escriba un titulo para el lugar seleccionado</Text>
             <TextInput 
               style={styles.input} 
               value={title}
@@ -56,11 +57,11 @@ const NewPlaceScreen = ({ navigation }) => {
             onImage={(image)=>setImage(image)}
             />
             <LocationSelector
-            onLocation={(location) => console.log(location)}
+            onLocation={(coords) => setCoords(coords)}
             />
             <Button 
               color={colors.darkBlue}  
-              title='Add direction'
+              title='Guardar lugar'
               onPress={() => handleSave()}>
                </Button>
         </View>
