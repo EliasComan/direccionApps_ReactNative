@@ -1,10 +1,10 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React,{useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 
-import { Place } from "../models/place";
 import PlaceItem from "../components/placeItem";
-import React from 'react'
 import {colors} from "../utils/colors";
-import { useSelector } from "react-redux";
+import { loadPlaces } from "../store/place.actions";
 
 const styles = StyleSheet.create({
     container:{
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 
 
 const PlaceListScreen = ({navigation}) => {
+  const dispatch = useDispatch()
  const places= useSelector(state => state.place.places)
  
  const onSelected = ( id) => {
@@ -56,6 +57,10 @@ const PlaceListScreen = ({navigation}) => {
     </View>
   )
  }
+
+ useEffect(() => {
+  dispatch(loadPlaces());
+}, []);
  return (
     <FlatList 
     data={places}

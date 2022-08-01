@@ -1,8 +1,9 @@
 import * as fileSystem from 'expo-file-system'
 
-import React from 'react'
+import {addPlace, loadAddress} from './place.reducer'
+import { fetchAddress, insertAddress } from '../db/db.sqlite'
+
 import { URL_GEOCODING } from '../utils/maps'
-import {addPlace} from './place.reducer'
 
 export const savePlace = (title, image, coords) => {
     return async dispatch => {
@@ -13,7 +14,6 @@ export const savePlace = (title, image, coords) => {
         
 
         const address= data.results[0].formatted_address
-        console.log(address)
         const fileName =  image.split('/').pop()
         const path = fileSystem.documentDirectory+fileName;
 
@@ -22,9 +22,21 @@ export const savePlace = (title, image, coords) => {
             from:image,
             to:path
             })
+            const dbRespponse = await insertAddress(title,path,address,coords)
+            dispatch(addPlace({id:dbRespponse.insertId,title,image:path, address, coords}))
         } catch (error) {
             console.log(error)
         }
-        dispatch(addPlace({title,image:path, address, coords}))
+    }
+}
+
+export const loadPlaces = () => {
+    return async (dispatch) => {
+        try {
+            const result = await fetchAddress()
+            dispatch(loadAddress(result.rows._array))
+        } catch (error) {
+            throw Error
+        }
     }
 }
